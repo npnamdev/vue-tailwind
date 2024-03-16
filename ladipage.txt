@@ -1,0 +1,275 @@
+
+<template>
+  <div class="grid grid-cols-[330px_auto_280px] h-[100vh]">
+    <div class="grid grid-cols-[68px_auto] h-full bg-white">
+      <div class="border">
+        <a class="flex justify-center items-center h-[80px] border" href="#">
+          <img class="w-[36px]" src="./svg/logo.svg" alt="">
+        </a>
+        <div class="">
+          <i class='bx bx-objects-horizontal-center'></i>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="border" id="sidebar">
+        <div class="grid grid-cols-3 gap-2 p-2">
+          <div class="border py-5 flex justify-center rounded-xl" draggable="true" @dragstart="drag($event, 'div', 'Container', 'bg-red-500 py-5')">
+            Container
+          </div>
+
+          <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'span', 'Thông tin', 'bg-green-500')">
+            Thông tin
+          </div>
+
+          <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'p', 'Nội dung')">
+            Nội dung
+          </div>
+          
+          <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'h1', 'Tiêu đề lớn')">
+            Tiêu đề lớn
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="bg-[#007dfc] p-6 flex flex-col gap-2" id="content" @dragover="allowDrop" @drop="drop">
+      Content
+    </div>
+
+    <!-- Sidebar right -->
+    <div class="p-5">
+      <div v-if="selectedBox">
+        <h2>Thông tin chi tiết phần thử kéo vào:</h2>
+        <p>{{ selectedBox }}</p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import Container from "./components/Container.vue";
+import { ref } from 'vue';
+
+let selectedBox = ref(null);
+
+const allowDrop = (event) => {
+  event.preventDefault();
+}
+
+const drag = (event, tag, content, class2) => {
+  event.dataTransfer.setData("text", `<${tag} class="${class2}" contenteditable="true">${content}</${tag}>`);
+}
+
+const drop = (event) => {
+  event.preventDefault();
+  var data = event.dataTransfer.getData("text");
+  var node = document.createElement("div");
+  node.innerHTML = data;
+  event.target.appendChild(node.firstChild);
+  node.firstChild.setAttribute("draggable", "true");
+  node.firstChild.setAttribute("ondragstart", "drag(event)");
+}
+
+const showBoxDetails = (boxName) => {
+  selectedBox.value = boxName;
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template>
+  <div class="grid grid-cols-[330px_auto_280px] h-[100vh]">
+    <div class="grid grid-cols-[68px_auto] h-full bg-white">
+      <div class="border">
+        <a class="flex justify-center items-center h-[80px] border" href="#">
+          <img class="w-[36px]" src="./svg/logo.svg" alt="">
+        </a>
+        <div class="">
+          <i class='bx bx-objects-horizontal-center'></i>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="border" id="sidebar">
+        <div class="grid grid-cols-3 gap-2 p-2">
+            <div class="border py-5 flex justify-center rounded-xl" draggable="true" @dragstart="drag($event, 'div', 'Container', 'bg-red-500 py-5')">
+              Container
+            </div>
+            <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'span', 'Thông tin', 'bg-green-500')">
+              Thông tin
+            </div>
+            <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'p', 'Nội dung')">
+              Nội dung
+            </div>
+            <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'h1', 'Tiêu đề lớn')">
+              Tiêu đề lớn
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="bg-[#007dfc] p-6 flex flex-col gap-2" id="content" @dragover="allowDrop" @drop="drop">
+      Content
+      
+    </div>
+
+    <!-- Sidebar right -->
+    <div class="p-5">
+      Thông tin chi tiết phần thử kéo vào
+    </div>
+  </div>
+</template>
+
+<script setup>
+import Container from "./components/Container.vue";
+  import { ref } from 'vue';
+  const allowDrop = (event) => {
+    event.preventDefault();
+  }
+
+  const drag = (event, tag, content, class2) => {
+    // event.dataTransfer.setData("text", <Container/>);
+    event.dataTransfer.setData("text", `<${tag} class="${class2}" contenteditable="true">${content}</${tag}>`);
+  }
+
+  const drop = (event) => {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("text");
+    var node = document.createElement("div");
+    node.innerHTML = data;
+    event.target.appendChild(node.firstChild);
+    node.firstChild.setAttribute("draggable", "true");
+    node.firstChild.setAttribute("ondragstart", "drag(event)");
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+Bản update 2
+
+
+
+
+<template>
+  <div class="grid grid-cols-[330px_auto_280px] h-[100vh]">
+    <!-- Sidebar -->
+    <div class="grid grid-cols-[68px_auto] h-full bg-white">
+      <div class="border">
+        <a class="flex justify-center items-center h-[80px] border" href="#">
+          <img class="w-[36px]" src="./svg/logo.svg" alt="">
+        </a>
+        <div class="">
+          <i class='bx bx-objects-horizontal-center'></i>
+        </div>
+      </div>
+      <!-- Sidebar -->
+      <div class="border" id="sidebar">
+        <div class="grid grid-cols-3 gap-2 p-2">
+          <div class="border py-5 flex justify-center rounded-xl" draggable="true" @dragstart="drag($event, 'div', 'Container', 'bg-red-500 py-5')">
+            Container
+          </div>
+          <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'span', 'Thông tin', 'bg-green-500')">
+            Thông tin
+          </div>
+          <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'p', 'Nội dung')">
+            Nội dung
+          </div>
+          <div class="border py-5 flex justify-center" draggable="true" @dragstart="drag($event, 'h1', 'Tiêu đề lớn')">
+            Tiêu đề lớn
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="bg-[#007dfc] p-6 flex flex-col gap-2" id="content" @dragover="allowDrop" @drop="drop" @click="showBoxDetails">
+      <div class="bg-white p-4" :style="{ width: boxStyles.width, height: boxStyles.height, backgroundColor: boxStyles.backgroundColor }">Box 1</div>
+      <div class="bg-white p-4" :style="{ width: boxStyles.width, height: boxStyles.height, backgroundColor: boxStyles.backgroundColor }">Box 2</div>
+      <div class="bg-white p-4" :style="{ width: boxStyles.width, height: boxStyles.height, backgroundColor: boxStyles.backgroundColor }">Box 3</div>
+    </div>
+
+    <!-- Sidebar right -->
+    <div class="p-5">
+      <div v-if="selectedBox">
+        <h2>Thông tin chi tiết phần thử kích vào:</h2>
+        <p>{{ selectedBox }}</p>
+        <label>Width:</label>
+        <input type="text" v-model="boxStyles.width">
+        <label>Height:</label>
+        <input type="text" v-model="boxStyles.height">
+        <label>Màu sắc:</label>
+        <input type="color" v-model="boxStyles.backgroundColor">
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+let selectedBox = ref(null);
+
+const allowDrop = (event) => {
+  event.preventDefault();
+}
+
+const drag = (event, tag, content, class2) => {
+  event.dataTransfer.setData("text", `<${tag} class="${class2}" contenteditable="true">${content}</${tag}>`);
+}
+
+const drop = (event) => {
+  event.preventDefault();
+  var data = event.dataTransfer.getData("text");
+  var node = document.createElement("div");
+  node.innerHTML = data;
+  event.target.appendChild(node.firstChild);
+  node.firstChild.setAttribute("draggable", "true");
+  node.firstChild.setAttribute("ondragstart", "drag(event)");
+}
+
+const showBoxDetails = (event) => {
+  const clickedElement = event.target;
+  const selectedElement = clickedElement.closest('.p-6 > *');
+  if (selectedElement) {
+    selectedBox.value = selectedElement.textContent.trim();
+  } else {
+    selectedBox.value = null;
+  }
+}
+
+let boxStyles = ref({
+  width: '100px',
+  height: '100px',
+  backgroundColor: '#ffffff'
+});
+</script>
